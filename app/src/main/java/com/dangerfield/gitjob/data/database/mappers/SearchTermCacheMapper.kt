@@ -6,10 +6,10 @@ import com.dangerfield.gitjob.domain.util.EntityMapper
 
 class SearchTermCacheMapper : EntityMapper<SearchTermEntity,SearchedTerm> {
     override fun mapFromEntity(entity: SearchTermEntity): SearchedTerm {
-        TODO("Not yet implemented")
+        return SearchedTerm(entity.term)
     }
 
     override fun mapToEntity(domainModel: SearchedTerm): SearchTermEntity {
-        TODO("Not yet implemented")
+        return SearchTermEntity(domainModel.term)
     }
 }

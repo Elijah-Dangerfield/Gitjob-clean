@@ -24,23 +24,6 @@ class JobListingCacheEntity (
     var cityFilter: String? = null, //TODO not sure if i like this
     var saved: Boolean = false
 ) : Parcelable {
-    fun mapToDomainModel(): JobListing {
-        return JobListing(
-            company = this.company,
-            company_logo = this.company_logo,
-            company_url = this.company_url,
-            created_at = this.created_at,
-            description = this.description,
-            how_to_apply = this.how_to_apply,
-            id = this.id,
-            location = this.location,
-            title = this.title,
-            type = this.type,
-            url = this.url,
-            saved = this.saved,
-            cityFilter = this.cityFilter,
-        )
-    }
 }
 
 //used to store listings that were saved by user
@@ -60,8 +43,8 @@ class SavedJobListingCacheEntity (
     var url: String? = null,
 ) : Parcelable {
 
-    fun mapToDomainModel(): JobListing {
-        return JobListing(
+    fun toJobListingCacheEntity(): JobListingCacheEntity {
+        return JobListingCacheEntity(
             company = this.company,
             company_logo = this.company_logo,
             company_url = this.company_url,

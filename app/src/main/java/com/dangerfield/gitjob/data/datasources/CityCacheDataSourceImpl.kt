@@ -2,16 +2,16 @@ package com.dangerfield.gitjob.data.datasources
 
 import com.dangerfield.gitjob.data.database.mappers.CityCacheMapper
 import com.dangerfield.gitjob.data.database.room.GitJobDatabase
-import com.dangerfield.gitjob.domain.datasource.cache.SavedCitiesCacheDataSource
+import com.dangerfield.gitjob.domain.datasource.cache.CityCacheDataSource
 import com.dangerfield.gitjob.domain.model.City
 
-class SavedCitiesCacheDataSourceImpl   (
+class CityCacheDataSourceImpl   (
     private val db: GitJobDatabase,
 private val savedCityCacheMapper: CityCacheMapper
-) : SavedCitiesCacheDataSource{
+) : CityCacheDataSource{
 
     override suspend fun saveCity(city: City) {
-       db.mainDao().insertSearchedCity(savedCityCacheMapper.mapToEntity(city))
+       return db.mainDao().insertSearchedCity(savedCityCacheMapper.mapToEntity(city))
     }
 
     override suspend fun getAllSavedCities(): List<City> {

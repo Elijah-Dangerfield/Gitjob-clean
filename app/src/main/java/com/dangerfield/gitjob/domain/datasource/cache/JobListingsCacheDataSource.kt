@@ -7,4 +7,5 @@ interface JobListingsCacheDataSource {
     suspend fun getSavedJobListings() : List<JobListing>
     suspend fun saveJobListing(job: JobListing)
     suspend fun unsaveJobListing(job: JobListing)
+    suspend fun getSavedJob(id: String) : List<JobListing>
 }
