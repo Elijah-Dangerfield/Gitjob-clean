@@ -1,4 +1,4 @@
-package com.dangerfield.gitjob.domain.util
+package com.dangerfield.gitjob.domain.datasource.network
 
 object NetworkConstants {
 

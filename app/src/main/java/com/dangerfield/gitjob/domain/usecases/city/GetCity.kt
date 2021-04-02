@@ -4,8 +4,8 @@ import com.dangerfield.gitjob.domain.datasource.network.CityNetworkDataSource
 import com.dangerfield.gitjob.domain.model.City
 import com.dangerfield.gitjob.domain.model.Location
 import com.dangerfield.gitjob.domain.usecases.UseCase
-import com.dangerfield.gitjob.domain.util.DataState
-import com.dangerfield.gitjob.domain.util.NetworkCallWrapper
+import com.dangerfield.gitjob.domain.model.DataState
+import com.dangerfield.gitjob.domain.datasource.network.NetworkCallWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

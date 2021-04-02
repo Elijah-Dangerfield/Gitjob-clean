@@ -2,9 +2,7 @@ package com.dangerfield.gitjob.domain.usecases.city
 
 import com.dangerfield.gitjob.domain.datasource.cache.CityCacheDataSource
 import com.dangerfield.gitjob.domain.model.City
-import com.dangerfield.gitjob.domain.util.DataState
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.junit.Test

@@ -1,6 +1,7 @@
-package com.dangerfield.gitjob.domain.util
+package com.dangerfield.gitjob.domain.datasource.cache
 
-import com.dangerfield.gitjob.domain.util.DatabaseConstants.CACHE_TIMEOUT
+import com.dangerfield.gitjob.domain.model.DataState
+import com.dangerfield.gitjob.domain.datasource.cache.DatabaseConstants.CACHE_TIMEOUT
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withContext
@@ -21,7 +22,10 @@ class CacheCallWrapper {
                 try {
                     // throws TimeoutCancellationException
                     withTimeout(CACHE_TIMEOUT){
-                        val result : DataState<T?, CacheError> = DataState.Success(cacheCall.invoke())
+                        val result : DataState<T?, CacheError> =
+                            DataState.Success(
+                                cacheCall.invoke()
+                            )
                         result
                     }
                 } catch (throwable: Throwable) {
@@ -29,11 +33,17 @@ class CacheCallWrapper {
                     when (throwable) {
 
                         is TimeoutCancellationException -> {
-                            val error : DataState<T?, CacheError> = DataState.Error(error = CacheError.Timeout())
+                            val error : DataState<T?, CacheError> =
+                                DataState.Error(
+                                    error = CacheError.Timeout()
+                                )
                             error
                         }
                         else -> {
-                            val error : DataState<T?, CacheError> = DataState.Error(error = CacheError.Unknown())
+                            val error : DataState<T?, CacheError> =
+                                DataState.Error(
+                                    error = CacheError.Unknown()
+                                )
                             error
                         }
                     }
