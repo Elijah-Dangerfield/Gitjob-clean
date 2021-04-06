@@ -17,6 +17,7 @@ adding a searched city. I imagine ill care more on network things
  */
 class AddSearchedCity(
     private val cityCacheDataSource: CityCacheDataSource,
+    private val cacheCallWrapper: CacheCallWrapper
 ) : UseCase<Flow<DataState<Unit, CityError>>, City>{
 
     //TODO README
@@ -27,7 +28,7 @@ class AddSearchedCity(
             // do i even need to catch errors here? i could just call .catch() on the flow
             // i guess the question is who should do error catching and is that the same thing
             //that should do error handling?
-            val cacheResult = CacheCallWrapper.safeCacheCall(Dispatchers.IO) {
+            val cacheResult = cacheCallWrapper.safeCacheCall(Dispatchers.IO) {
                 cityCacheDataSource.saveCity(input)
             }
             val result: DataState<Unit, CityError> = when(cacheResult) {

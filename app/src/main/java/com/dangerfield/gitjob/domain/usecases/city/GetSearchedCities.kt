@@ -10,11 +10,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class GetSearchedCities(
-    private val cityCacheDataSource: CityCacheDataSource
+    private val cityCacheDataSource: CityCacheDataSource,
+    private val cacheCallWrapper: CacheCallWrapper
 ) : NoInputUseCase<Flow<DataState<List<City>, CityError>>> {
     override fun invoke(): Flow<DataState<List<City>, CityError>> {
         return flow {
-            val cacheResult = CacheCallWrapper.safeCacheCall(Dispatchers.IO) {
+            val cacheResult = cacheCallWrapper.safeCacheCall(Dispatchers.IO) {
                 cityCacheDataSource.getAllSavedCities()
             }
             val result: DataState<List<City>, CityError> = when(cacheResult) {

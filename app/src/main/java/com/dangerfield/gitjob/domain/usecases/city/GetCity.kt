@@ -11,12 +11,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class GetCity(
-    private val cityNetworkDataSource: CityNetworkDataSource
+    private val cityNetworkDataSource: CityNetworkDataSource,
+    private val networkCallWrapper: NetworkCallWrapper
 ) : UseCase<Flow<DataState<City, CityError>>, Location> {
 
     override fun invoke(input: Location): Flow<DataState<City, CityError>> {
         return flow {
-            val networkResult = NetworkCallWrapper.safeApiCall(Dispatchers.IO) {
+            val networkResult = networkCallWrapper.safeApiCall(Dispatchers.IO) {
                 cityNetworkDataSource.getCity(input)
             }
             val result: DataState<City, CityError> = when (networkResult) {

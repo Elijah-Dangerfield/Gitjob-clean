@@ -10,12 +10,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class RemoveSearchedCity(
-    private val cityCacheDataSource: CityCacheDataSource
+    private val cityCacheDataSource: CityCacheDataSource,
+    private val cacheCallWrapper: CacheCallWrapper
 ) : UseCase<Flow<DataState<Unit, CityError>>, City> {
 
     override fun invoke(input: City): Flow<DataState<Unit, CityError>> {
         return flow {
-            val cacheResult = CacheCallWrapper.safeCacheCall(Dispatchers.IO) {
+            val cacheResult = cacheCallWrapper.safeCacheCall(Dispatchers.IO) {
                 cityCacheDataSource.removeSavedCity(input)
             }
             val result: DataState<Unit, CityError> = when(cacheResult) {
