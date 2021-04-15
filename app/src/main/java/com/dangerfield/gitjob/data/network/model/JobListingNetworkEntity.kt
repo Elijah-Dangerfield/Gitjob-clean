@@ -30,7 +30,6 @@ data class JobListingNetworkEntity(
             type = this.type,
             url = this.url,
             saved = false,
-            cityFilter = city,
         )
     }
 }

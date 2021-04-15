@@ -1,37 +1,16 @@
 package com.dangerfield.gitjob.domain.datasource.network
 
-import com.dangerfield.gitjob.domain.model.NetworkError
-import com.dangerfield.gitjob.domain.model.DataState
-import com.dangerfield.gitjob.domain.datasource.network.NetworkConstants.NETWORK_TIMEOUT
+import com.dangerfield.gitjob.domain.model.NetworkResponse
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 
-class NetworkCallWrapper constructor(
-    private val networkCallErrorHandler: NetworkCallErrorHandler
-) {
-    suspend fun <T> safeApiCall(
+/*
+Network call wrappers should be implemented by data layer to wrap networks calls made and
+handle mapping to a data state of either the Domain Model OR a Network Error depending on the result
+of the network call
+ */
+interface NetworkCallWrapper {
+    suspend fun<T> safeNetworkCall(
         dispatcher: CoroutineDispatcher,
-        apiCall: suspend () -> T?
-    ): DataState<T?, NetworkError> {
-        return withContext(dispatcher) {
-            try {
-                // throws TimeoutCancellationException
-                withTimeout(NETWORK_TIMEOUT) {
-                    val success: DataState<T?, NetworkError> =
-                        DataState.Success(
-                            apiCall.invoke()
-                        )
-                    success
-                }
-            } catch (throwable: Throwable) {
-                throwable.printStackTrace()
-                val error: DataState<T?, NetworkError> =
-                    DataState.Error(
-                        error = networkCallErrorHandler.onError(throwable)
-                    )
-                error
-            }
-        }
-    }
+        networkCall: suspend () -> T
+    ) : NetworkResponse<T>
 }

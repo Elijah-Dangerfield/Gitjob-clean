@@ -12,6 +12,5 @@ class JobListing(
     var title: String? = null,
     var type: String? = null,
     var url: String? = null,
-    var saved: Boolean = false,
-    var cityFilter: String? = null
+    var saved: Boolean = false
 )

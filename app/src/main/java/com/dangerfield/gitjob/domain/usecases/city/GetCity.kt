@@ -4,32 +4,33 @@ import com.dangerfield.gitjob.domain.datasource.network.CityNetworkDataSource
 import com.dangerfield.gitjob.domain.model.City
 import com.dangerfield.gitjob.domain.model.Location
 import com.dangerfield.gitjob.domain.usecases.UseCase
-import com.dangerfield.gitjob.domain.model.DataState
+import com.dangerfield.gitjob.domain.model.Resource
 import com.dangerfield.gitjob.domain.datasource.network.NetworkCallWrapper
-import kotlinx.coroutines.Dispatchers
+import com.dangerfield.gitjob.domain.model.NetworkResponse
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class GetCity(
     private val cityNetworkDataSource: CityNetworkDataSource,
-    private val networkCallWrapper: NetworkCallWrapper
-) : UseCase<Flow<DataState<City, CityError>>, Location> {
+    private val networkCallWrapper: NetworkCallWrapper,
+    private val dispatcher: CoroutineDispatcher
+) : UseCase<Flow<Resource<City, CityError>>, Location> {
 
-    override fun invoke(input: Location): Flow<DataState<City, CityError>> {
+    override fun invoke(input: Location): Flow<Resource<City, CityError>> {
         return flow {
-            val networkResult = networkCallWrapper.safeApiCall(Dispatchers.IO) {
+            val networkResult = networkCallWrapper.safeNetworkCall(dispatcher) {
                 cityNetworkDataSource.getCity(input)
             }
-            val result: DataState<City, CityError> = when (networkResult) {
-                is DataState.Success -> {
+            val result: Resource<City, CityError> = when (networkResult) {
+                is NetworkResponse.Success -> {
                     if (networkResult.data != null) {
-                        DataState.Success(networkResult.data)
+                        Resource.Success(networkResult.data)
                     } else {
-                        DataState.Error(error = CityError.ERROR_GETTING_CITY)
+                        Resource.Error(error = CityError.ERROR_GETTING_CITY)
                     }
                 }
-                //TODO this is where I could do more specific error checking
-                is DataState.Error -> DataState.Error(error = CityError.ERROR_GETTING_CITY)
+                is NetworkResponse.Error -> Resource.Error(error = CityError.ERROR_GETTING_CITY)
             }
             emit(result)
         }
