@@ -5,7 +5,12 @@ import com.dangerfield.gitjob.domain.datasource.cache.JobListingsCacheDataSource
 import com.dangerfield.gitjob.domain.datasource.network.JobListingsNetworkDataSource
 import com.dangerfield.gitjob.domain.datasource.network.NetworkCallWrapper
 import com.dangerfield.gitjob.domain.model.*
-import com.dangerfield.gitjob.domain.usecases.UseCase
+import com.dangerfield.gitjob.domain.model.feed.FeedCityState
+import com.dangerfield.gitjob.domain.model.feed.JobListingFeed
+import com.dangerfield.gitjob.domain.model.util.CacheResponse
+import com.dangerfield.gitjob.domain.model.util.NetworkManager
+import com.dangerfield.gitjob.domain.model.util.NetworkResponse
+import com.dangerfield.gitjob.domain.model.util.Resource
 import com.dangerfield.gitjob.domain.util.RateLimiter
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
@@ -18,19 +23,19 @@ class GetJobListingFeed(
     private val networkCallWrapper: NetworkCallWrapper,
     private val cacheCallWrapper: CacheCallWrapper,
     private val dispatcher: CoroutineDispatcher
-) : UseCase<Flow<Resource<JobListingFeed, JobListingFeedError>>, City?> {
+)  {
 
     private val requestKey = "JOB_FEED_REQUEST"
 
-    override fun invoke(input: City?): Flow<Resource<JobListingFeed, JobListingFeedError>> = flow {
+    fun invoke(city: City?, feedCityState: FeedCityState, forceRefresh: Boolean): Flow<Resource<JobListingFeed, JobListingFeedError>> = flow {
 
         val cachedFeedResponse = getCachedFeed()
 
-        if (shouldFetchNewFeed(cachedFeedResponse, input)) {
+        if (forceRefresh || shouldFetchNewFeed(cachedFeedResponse, city)) {
 
             emit(Resource.Loading(cachedFeedResponse.cacheData))
 
-            when (val networkResponse = fetchNewFeed(input)) {
+            when (val networkResponse = fetchNewFeed(city, feedCityState)) {
                 is NetworkResponse.Success -> {
                     saveFeed(networkResponse.data) // TODO cache call could fail
                     emitAll(jobListingsCacheDataSource.getJobListingFeed().map {
@@ -44,9 +49,7 @@ class GetJobListingFeed(
                         jobListingsCacheDataSource.getJobListingFeed()
                             .map { Resource.Error(it, networkResponse.error) })
                 }
-
             }
-
         } else {
             val dbFlow: Flow<Resource<JobListingFeed, JobListingFeedError>> =
                 jobListingsCacheDataSource.getJobListingFeed().map { Resource.Success(it) }
@@ -76,9 +79,9 @@ class GetJobListingFeed(
                 || !isDataUsable)
     }
 
-    private suspend fun fetchNewFeed(city: City?): NetworkResponse<JobListingFeed> {
+    private suspend fun fetchNewFeed(city: City?, feedCityState: FeedCityState): NetworkResponse<JobListingFeed> {
         return networkCallWrapper.safeNetworkCall(dispatcher) {
-            jobListingsNetworkDataSource.getJobListingsFeed(city?.name)
+            jobListingsNetworkDataSource.getJobListingsFeed(city?.name, feedCityState)
         }
     }
 

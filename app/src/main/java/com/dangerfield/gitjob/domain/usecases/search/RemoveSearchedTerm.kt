@@ -2,8 +2,8 @@ package com.dangerfield.gitjob.domain.usecases.search
 
 import com.dangerfield.gitjob.domain.datasource.cache.CacheCallWrapper
 import com.dangerfield.gitjob.domain.datasource.cache.UserMetaDataCacheDataSource
-import com.dangerfield.gitjob.domain.model.CacheResponse
-import com.dangerfield.gitjob.domain.model.Resource
+import com.dangerfield.gitjob.domain.model.util.CacheResponse
+import com.dangerfield.gitjob.domain.model.util.Resource
 import com.dangerfield.gitjob.domain.model.SearchedTerm
 import com.dangerfield.gitjob.domain.usecases.UseCase
 import kotlinx.coroutines.CoroutineDispatcher

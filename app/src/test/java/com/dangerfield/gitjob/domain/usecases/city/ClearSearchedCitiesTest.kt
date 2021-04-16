@@ -3,7 +3,7 @@ package com.dangerfield.gitjob.domain.usecases.city
 import com.dangerfield.gitjob.data.datasources.cache.CacheCallWrapperImpl
 import com.dangerfield.gitjob.domain.datasource.cache.CacheCallWrapper
 import com.dangerfield.gitjob.domain.datasource.cache.CityCacheDataSource
-import com.dangerfield.gitjob.domain.model.Resource
+import com.dangerfield.gitjob.domain.model.util.Resource
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

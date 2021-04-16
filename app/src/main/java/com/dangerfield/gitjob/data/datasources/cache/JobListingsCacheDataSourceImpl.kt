@@ -5,7 +5,7 @@ import com.dangerfield.gitjob.data.cache.mappers.JobListingFeedMetaDataCacheMapp
 import com.dangerfield.gitjob.data.cache.room.GitJobDatabase
 import com.dangerfield.gitjob.domain.datasource.cache.JobListingsCacheDataSource
 import com.dangerfield.gitjob.domain.model.JobListing
-import com.dangerfield.gitjob.domain.model.JobListingFeed
+import com.dangerfield.gitjob.domain.model.feed.JobListingFeed
 import kotlinx.coroutines.flow.*
 
 class JobListingsCacheDataSourceImpl(
@@ -50,5 +50,9 @@ class JobListingsCacheDataSourceImpl(
 
     override suspend fun updateJobListingInFeed(id: String, saved: Boolean) {
         db.mainDao().updateJobListingInFeed(id, saved)
+    }
+
+    override suspend fun querySavedJob(id: String) : List<JobListing> {
+        return db.mainDao().querySavedJob(id).map { jobListingCacheMapper.mapFromEntity(it) }
     }
 }

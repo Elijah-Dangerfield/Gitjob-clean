@@ -3,7 +3,7 @@ package com.dangerfield.gitjob.domain.usecases.city
 import com.dangerfield.gitjob.data.datasources.network.NetworkCallWrapperImpl
 import com.dangerfield.gitjob.domain.datasource.network.CityNetworkDataSource
 import com.dangerfield.gitjob.domain.model.City
-import com.dangerfield.gitjob.domain.model.Resource
+import com.dangerfield.gitjob.domain.model.util.Resource
 import com.dangerfield.gitjob.domain.model.Location
 import io.mockk.coEvery
 import io.mockk.mockk

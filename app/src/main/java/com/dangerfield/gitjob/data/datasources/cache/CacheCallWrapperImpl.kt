@@ -3,7 +3,7 @@ package com.dangerfield.gitjob.data.datasources.cache
 import com.dangerfield.gitjob.domain.datasource.cache.CacheCallWrapper
 import com.dangerfield.gitjob.domain.datasource.cache.CacheError
 import com.dangerfield.gitjob.domain.datasource.cache.DatabaseConstants.CACHE_TIMEOUT
-import com.dangerfield.gitjob.domain.model.CacheResponse
+import com.dangerfield.gitjob.domain.model.util.CacheResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withContext

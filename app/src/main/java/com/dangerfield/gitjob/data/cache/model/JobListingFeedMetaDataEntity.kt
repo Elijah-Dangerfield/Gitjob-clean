@@ -3,6 +3,7 @@ package com.dangerfield.gitjob.data.cache.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.dangerfield.gitjob.domain.model.feed.FeedCityState
 import kotlinx.parcelize.Parcelize
 
 
@@ -12,7 +13,8 @@ import kotlinx.parcelize.Parcelize
 data class JobListingFeedMetaDataEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
-    var city: String,
-    var timestamp: String
+    var city: String? = "",
+    var timestamp: String,
+    var feedCityState: String
 ) : Parcelable {
 }

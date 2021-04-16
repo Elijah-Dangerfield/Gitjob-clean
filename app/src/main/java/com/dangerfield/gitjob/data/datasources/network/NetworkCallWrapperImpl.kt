@@ -1,9 +1,9 @@
 package com.dangerfield.gitjob.data.datasources.network
 
 import com.dangerfield.gitjob.domain.datasource.network.NetworkCallWrapper
-import com.dangerfield.gitjob.domain.model.NetworkError
+import com.dangerfield.gitjob.domain.model.util.NetworkError
 import com.dangerfield.gitjob.domain.datasource.network.NetworkConstants.NETWORK_TIMEOUT
-import com.dangerfield.gitjob.domain.model.NetworkResponse
+import com.dangerfield.gitjob.domain.model.util.NetworkResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withContext

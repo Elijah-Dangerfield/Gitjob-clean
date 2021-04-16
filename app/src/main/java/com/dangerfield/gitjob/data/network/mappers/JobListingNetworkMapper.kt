@@ -8,7 +8,7 @@ class JobListingNetworkMapper : EntityMapper<JobListingNetworkEntity, JobListing
 
     fun mapFromEntity(entity: JobListingNetworkEntity, saved: Boolean = false, cityFilter: String? = null): JobListing {
         val domainModel = mapFromEntity(entity)
-        domainModel.cityFilter = cityFilter
+        domainModel.description = cityFilter
         domainModel.saved = saved
         return domainModel
     }

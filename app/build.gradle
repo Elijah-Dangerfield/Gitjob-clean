@@ -2,6 +2,8 @@ plugins {
   id 'com.android.application'
   id 'kotlin-android'
   id 'kotlin-parcelize'
+  id 'kotlin-kapt'
+  id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -28,8 +30,13 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
   kotlinOptions {
     jvmTarget = '1.8'
+  }
+
+  buildFeatures {
+    viewBinding true
   }
 }
 
@@ -42,6 +49,10 @@ dependencies {
   implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
   implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
+  //hilt
+  implementation "com.google.dagger:hilt-android:$hilt_version"
+  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+  kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
   //retrofit and networking helpers
   implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -56,8 +67,21 @@ dependencies {
   testImplementation 'junit:junit:4.13.2'
   androidTestImplementation 'androidx.test.ext:junit:1.1.2'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-  testImplementation "io.mockk:mockk:1.9.3"
+  testImplementation "io.mockk:mockk:1.11.0"
   testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3'
+
+  // locations
+  implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+  //used for HTML parsing
+  implementation 'org.jsoup:jsoup:1.9.1'
+
+  //navigation
+  implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+  implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+  //glide for image processing
+  implementation 'com.github.bumptech.glide:glide:4.11.0'
 
 
 

@@ -1,4 +1,4 @@
-package com.dangerfield.gitjob.domain.model
+package com.dangerfield.gitjob.domain.model.util
 
 sealed class NetworkResponse<T>(
     val networkData: T? = null,

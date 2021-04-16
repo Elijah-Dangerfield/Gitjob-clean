@@ -1,4 +1,4 @@
-package com.dangerfield.gitjob.domain.model
+package com.dangerfield.gitjob.domain.model.util
 
 sealed class NetworkError(val message: String) {
     class IO(message: String? = null) : NetworkError(message ?: "IO Error")

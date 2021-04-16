@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_saved_jobs"
+    app:startDestination="@id/savedJobsFragment">
+
+    <fragment
+        android:id="@+id/savedJobsFragment"
+        android:name="com.dangerfield.gitjob.presentation.saved.SavedJobsFragment"
+        android:label="fragment_saved_jobs"
+        tools:layout="@layout/fragment_saved_jobs" />
+</navigation>

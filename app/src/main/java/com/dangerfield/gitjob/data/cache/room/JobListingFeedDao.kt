@@ -60,6 +60,12 @@ interface JobListingFeedDao {
     suspend fun updateJobListingInFeed(id: String, saved: Boolean)
 
     /**
+     * queries for a saved job with a job id
+     */
+    @Query("SELECT * from SAVED_JOB_LISTINGS WHERE id = :withID")
+    suspend fun querySavedJob(withID: String): List<JobListingCacheEntity>
+
+    /**
      * replaces all data in database
      */
     @Transaction

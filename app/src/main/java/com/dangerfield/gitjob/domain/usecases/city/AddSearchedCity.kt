@@ -2,10 +2,10 @@ package com.dangerfield.gitjob.domain.usecases.city
 
 import com.dangerfield.gitjob.domain.datasource.cache.CacheCallWrapper
 import com.dangerfield.gitjob.domain.datasource.cache.CityCacheDataSource
-import com.dangerfield.gitjob.domain.model.CacheResponse
+import com.dangerfield.gitjob.domain.model.util.CacheResponse
 import com.dangerfield.gitjob.domain.model.City
 import com.dangerfield.gitjob.domain.usecases.UseCase
-import com.dangerfield.gitjob.domain.model.Resource
+import com.dangerfield.gitjob.domain.model.util.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

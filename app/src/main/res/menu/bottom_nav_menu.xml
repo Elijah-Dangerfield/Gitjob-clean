@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_graph_jobs_feed"
+        android:icon="@drawable/ic_briefcase"
+        android:title="@string/jobs" />
+
+    <item
+        android:id="@+id/nav_graph_saved_jobs"
+        android:icon="@drawable/ic_heart"
+        android:title="@string/saved" />
+
+</menu>

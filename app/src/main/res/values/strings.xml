@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gitjob</string>
+    <string name="jobs">Jobs</string>
+    <string name="saved">Saved</string>
 </resources>

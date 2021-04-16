@@ -1,4 +1,4 @@
-package com.dangerfield.gitjob.domain.model
+package com.dangerfield.gitjob.domain.model.util
 
 import com.dangerfield.gitjob.domain.datasource.cache.CacheError
 

@@ -1,6 +1,6 @@
 package com.dangerfield.gitjob.domain.datasource.network
 
-import com.dangerfield.gitjob.domain.model.NetworkResponse
+import com.dangerfield.gitjob.domain.model.util.NetworkResponse
 import kotlinx.coroutines.CoroutineDispatcher
 
 /*

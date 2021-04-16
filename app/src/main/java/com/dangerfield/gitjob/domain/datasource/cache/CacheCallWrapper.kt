@@ -1,7 +1,6 @@
 package com.dangerfield.gitjob.domain.datasource.cache
 
-import com.dangerfield.gitjob.domain.model.CacheResponse
-import com.dangerfield.gitjob.domain.model.Resource
+import com.dangerfield.gitjob.domain.model.util.CacheResponse
 import kotlinx.coroutines.CoroutineDispatcher
 
 /*
